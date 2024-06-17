@@ -1,0 +1,16 @@
+extends common/layout 
+
+block layout-content 
+    //create form to add a new document to menuLinks
+    h2 Add a new link
+    form(method="post", action="/admin/menu/add/submit")
+        div 
+            label(for="wgt") Weight: 
+            input(type="number", id="wgt", name="weight")
+        div
+            label(for="href") URI:  
+            input(type="text", id="href", name="path", placeholder="e.g. /contact")
+        div
+            label(for="link=name") Link text: 
+            input(type="text", id="link-name", name="name", placeholder="e.g. Contact")
+        button(type="submit") Add link

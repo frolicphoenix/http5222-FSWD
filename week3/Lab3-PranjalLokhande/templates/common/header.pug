@@ -1,0 +1,11 @@
+block scripts
+	script(src="/js/about.js")
+
+header#header
+	h2#site-name 
+		a(href="/") Random site did something change?
+	nav(aria-label="Main navigation")
+		ul 
+			each link in menu 
+				li 
+					a(href=link.path) #{link.name}

@@ -1,0 +1,15 @@
+doctype html 
+html 
+	head 
+		meta(charset="utf-8")
+		title #{title} | Random site 
+		-//public folder is treated like a root folder
+		link(rel="stylesheet", href="/css/styles.css")
+		block scripts
+			script(src="/js/common.js")
+	body 
+		include header.pug 
+		main#main
+			block layout-content 
+		footer#footer 
+			div &copy; Copyright pranjall, 2024.
