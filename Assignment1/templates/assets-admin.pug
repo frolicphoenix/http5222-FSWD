@@ -1,0 +1,29 @@
+extends layout 
+
+mixin box-wrap(price, imgsrc, name)
+    .box-wrap
+        .heading    
+            span #{price}
+        .box(style=`background-image: url(${imgsrc})`)
+            a(href="https://assetstore.unity.com/packages/3d/characters/robots/polygon-mech-pack-low-poly-3d-art-by-synty-262118") 
+                img.asset-images(src=imgsrc, alt='game assets')
+        .info 
+            p #{name}
+
+block featured-content 
+    .main-content 
+        .sub-header 
+            h2.page-title Assets
+                span 8 results
+        .addlink 
+            a(href="/assets/admin/add") + Click here to add your assets
+        .box-wrapper
+            +box-wrap('$100', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'Mech pack')
+            +box-wrap('$135', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/f0795071-7f9c-4371-9611-d0b084520fa6.webp', 'Dog pack')
+            +box-wrap('$320', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/2d2b90b0-3523-4f6d-acb7-b71d89729ce6.webp', 'Horror mansion')
+            +box-wrap('$120', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/1d1d77d2-4a0b-4000-abee-792b6f5f8521.webp', 'Fanstasy Rivals')
+            +box-wrap('$220', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/3d44a122-4045-400d-bfc7-30edc67d8edd.webp', 'Base locomotion')
+        p All the images listed here is the property of 
+            a(href="https://assetstore.unity.com/publishers/5217") SYNTY STUDIOS.
+            
+            
