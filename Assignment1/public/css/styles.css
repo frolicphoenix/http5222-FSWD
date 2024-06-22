@@ -9,7 +9,7 @@ h1, h2, p {
 
 a {
     text-decoration: none;
-    
+    color: red;
 }
 
 body {
@@ -103,7 +103,7 @@ span {
     margin-top: 30px;;
 }
 button {
-    background-color: red;
+    background-color: rgb(245, 255, 103);
     height: 60px;
     width: 150px;
     color: white;
@@ -141,10 +141,10 @@ button {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background-color: rgb(255, 255, 130);
+    /* background-color: rgb(255, 255, 130); */
 }
 
-.box-wrap , .box-wrapp {
+.box-wrap {
     width: 24%;
     margin: 0 0.5% 20px 0.5%;
     padding: 15px 20px;
@@ -178,12 +178,33 @@ button {
         display: flex;
         justify-content: space-between;
         line-height: 1.2;
-        font-size: 16px;
+        font-size: 24px;
         font-weight: 700;
+        color: blueviolet;
+        font-weight: 900;
     }
 }
 
-
+.about-content {
+    margin-top: 70px;
+}
+.about-people {
+    display: flex;
+    flex-direction: row;
+    height: 20px;
+}
+.about-person-one {
+    width: 25%;
+}
+.about-person-two {
+    width: 25%;
+}
+.about-person-three {
+    width: 25%;
+}
+.about-person-four {
+    width: 25%;
+}
 
 footer {
     margin-top: 40px;

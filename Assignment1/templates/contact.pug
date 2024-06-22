@@ -2,5 +2,13 @@ extends layout
 
 block layout-content
     .main-content 
-        h1.page-title Contact 
-        p a random paragraph about this contact form.
+        h1.page-title CONTACT US
+        form(action='/add_movie', method='POST')
+        p
+            | Your name: 
+            input(name='title', value='', type='text')
+            |          Email id: 
+            input(name='year', value='', type='email')
+            |          Message: 
+            input(name='imdb', value='', type='paragraph')
+        input(value='Submit', type='submit')

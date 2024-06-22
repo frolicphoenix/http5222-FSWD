@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 //SET UP PAGE ROUTE
-app.get("/lumhome", (request, response) => {
+app.get("/", (request, response) => {
     //response.status(200). send("Test");
     response.render("lumhome", { title: "Lum." });
 });
