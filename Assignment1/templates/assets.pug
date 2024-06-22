@@ -1,0 +1,37 @@
+extends layout 
+
+mixin box-wrap(price, imgsrc, top)
+    .box-wrap
+        .heading    
+            span #{price}
+        .box(style=`background-image: url(${imgsrc})`)
+            img.asset-images(src=imgsrc, alt='game assets')
+        .info 
+            p #{top} 
+
+mixin box-wrapp(price, imgsrc, top)
+    .box-wrapp
+        .heading    
+            span #{price}
+        .box(style=`background-image: url(${imgsrc})`)
+            img.asset-images(src=imgsrc, alt='game assets')
+        .info 
+            p 2D Game Assets 
+
+
+block featured-content 
+    .main-content 
+        .sub-header 
+            h2.page-title Assets
+                span 8 results
+        .box-wrapper
+            +box-wrap('$120', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'medivel')
+            +box-wrap('$120', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'scifi')
+            +box-wrapp('$320', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'environmetn')
+            +box-wrap('$120', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'environmetn')
+            +box-wrap('$520', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'environmetn')
+            +box-wrapp('$200', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'environmetn')
+            +box-wrapp('$220', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'environmetn')
+            +box-wrap('$520', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'environmetn')
+            
+            
