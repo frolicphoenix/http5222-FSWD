@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- This is an XML comment. -->
+<!-- JSON equivalent:
+[
+  {
+    id: 1,
+    job: "accountant",
+    ...
+  },
+  {
+    ...
+  }
+]
+-->
+<!-- XML is case-sensitive, so <people> and <PEOPLE> are considered different elements. -->
+<!-- XML element names must start with a letter or underscore. -->
+<!-- See page 2 of the PDF for all XML element naming rules. -->
+<people>
+  <person id="1" job="accountant">
+    <name>
+      <first>John</first>
+      <middle />
+      <last>Doe</last>
+    </name>
+  </person>
+  <person id="2" job="wizard">
+    <name>
+      <first>Harry</first>
+      <last>Potter</last>
+    </name>
+  </person>
+</people>

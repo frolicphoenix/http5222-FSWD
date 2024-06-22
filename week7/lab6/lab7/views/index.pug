@@ -1,0 +1,9 @@
+extends layout
+
+block main-content
+  h1 All Libraries 
+  each library in libraries
+    - let libraryId = library.querySelector("LocationID").textContent; 
+    - let libraryName = library.querySelector("LocationName").textContent;
+    div 
+      a(href=`/library/${libraryId}`) #{libraryName}

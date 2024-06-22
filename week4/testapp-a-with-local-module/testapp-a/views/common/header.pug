@@ -1,0 +1,8 @@
+header#header 
+  h2#site-name 
+    a(href="/") Random Site 
+  nav(aria-label="Main navigation")
+    ul 
+      each link in menu
+        li 
+          a(href=link.path) #{link.name}

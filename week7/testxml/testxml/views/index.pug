@@ -1,0 +1,9 @@
+extends layout
+
+block main-content
+  h1 Parks 
+  each park in parks
+    - let parkId = park.querySelector("LocationID").textContent; 
+    - let parkName = park.querySelector("LocationName").textContent;
+    div 
+      a(href=`/park/${parkId}`) #{parkName}

@@ -1,0 +1,21 @@
+{
+  "name": "testxml",
+  "version": "1.0.0",
+  "description": "Test XML and JSDom module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "ui": "browser-sync start --config bs-config.js"
+  },
+  "author": "Joanna K",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsdom": "^24.0.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "nodemon": "^3.0.3"
+  }
+}

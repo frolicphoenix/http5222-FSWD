@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+  <book>
+    <title>A Study in Scarlet</title>
+    <!-- "a" is a namespace (xmlns) prefix for author.
+         Namespaces are written in URL format (where you use your own domain name if you are the XML structure author).
+    -->
+    <!-- An element with a namespace specified with a namespace prefix is known as a "fully qualified element". -->
+    <a:author xmlns:a="http://joannakommala.com/namespaces/author">
+      <a:title>Sir</a:title>
+      <a:firstname>Arthur</a:firstname>
+      <a:middlename>Conan</a:middlename>
+      <a:lastname>Doyle</a:lastname>
+    </a:author>
+  </book>
+</books>

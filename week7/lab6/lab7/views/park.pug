@@ -1,0 +1,12 @@
+extends layout
+
+block main-content
+  - let pName = park.querySelector("LocationName").textContent;
+  - let pAddress = park.querySelector("Address").textContent;
+  - let pFacilities = park.querySelectorAll("FacilityDisplayName");
+  h1 #{pName}
+  p #{pAddress}
+  p Facilities:
+  ul
+    each f in pFacilities
+      li #{f.textContent}

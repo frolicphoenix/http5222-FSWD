@@ -1,0 +1,14 @@
+extends layout 
+
+block main-content
+    - let lName = library.querySelector("name").textContent;
+    - let lAddress = library.querySelector("address").textContent;
+    - let lPhone = library.querySelector("phoneNumber").textContent;
+    - let pLibraries = library.querySelectorAll("LibraryDisplayName");
+    h1 #{lName}
+    p #{lAddress}
+    p #{lPhone}
+    p All Libraries:
+    ul
+    each l in pLibraries
+      li #{l.textContent}
