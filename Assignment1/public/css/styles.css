@@ -137,6 +137,14 @@ button {
     }
 }
 
+.addassets {
+    margin-bottom: 20px;
+}
+
+label, input {
+    margin-bottom: 5px;
+} 
+
 .box-wrapper {
     width: 100%;
     display: flex;

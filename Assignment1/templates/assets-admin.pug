@@ -1,14 +1,14 @@
 extends layout 
 
-mixin box-wrap(price, imgsrc, name)
+mixin box-wrap(ast.price, ast.imgsrc, ast.name)
     .box-wrap
         .heading    
-            span #{price}
-        .box(style=`background-image: url(${imgsrc})`)
+            span #{ast.price}
+        .box(style=`background-image: url(${ast.imgsrc})`)
             a(href="https://assetstore.unity.com/packages/3d/characters/robots/polygon-mech-pack-low-poly-3d-art-by-synty-262118") 
                 img.asset-images(src=imgsrc, alt='game assets')
         .info 
-            p #{name}
+            p #{ast.name}
 
 block featured-content 
     .main-content 

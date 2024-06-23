@@ -17,6 +17,9 @@ app.set("view engine", "pug");
 // set up folder for static files (eg CSS, client side JS, image)
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 //SET UP PAGE ROUTE
 app.get("/", (request, response) => {
@@ -45,11 +48,23 @@ app.get("/assets/admin/add", async (request, response) => {
     let asset = await getAssets();
     response.render("assets-add", { title: "Add assets", list: asset })
 });
+app.post("/assets/admin/add/submit", async (request, response) => {
+    let weight = request.body.weight;
+    let price = request.body.price;
+    let imgsrc = request.body.imgsrc;
+    let name = request.body.name;
+
+    var newAssets = { "weight": weight, "price": price, "imgsrc": imgsrc, "name": name };
+
+    await addAssets(newAssets);
+    response.redirect("/assets")
+
+});
 
 //to run the port IMP
 app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`);
-})
+});
 
 //Functions
 async function connection() {
@@ -62,4 +77,9 @@ async function getAssets() {
     var results = db.collection("assets-list").find();
     res = await results.toArray();
     return res;
+}
+async function addAssets(ast) {
+    db = await connection();
+    var status = await db.collection("assets-list").insertOne(ast);
+    console.log("link added");
 }

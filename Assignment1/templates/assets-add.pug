@@ -20,16 +20,19 @@ block featured-content
             .addassets 
                 h1.page-title Add assets 
                 form(action="/assets/admin/add/submit", method="post")
-                div 
+                div
                     label(for="weight") Weight: 
                     input(type="number", min="0", id="weight", name="weight")
+                div 
+                    label(for="price") Price: 
+                    input(type="number", min="000", max="500", id="price", name="price", placeholder="$458")
                 div   
                     label(for="imgsrc") Image Url: 
                     input(type="text", id="imgsrc", name="imgsrc", placeholder="/assets")
                 div 
                     label(for="name") Asset name: 
                     input(type="text", id="name", name="name", placeholder="Fantasy")
-                button(type="submit", value="add-asset") Add asset 
+                button(type="submit", value="add-asset", style="color: red;") Add asset 
         .box-wrapper
             +box-wrap('$100', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e75327e4-bc7c-408c-a2fe-a788bc4f4dfc.webp', 'Mech pack')
             +box-wrap('$135', 'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/f0795071-7f9c-4371-9611-d0b084520fa6.webp', 'Dog pack')
