@@ -2,9 +2,8 @@ const express = require("express");
 const path = require("path"); //needed for functions having to do with file paths
 
 const { MongoClient } = require("mongodb");
-const { title } = require("process");
 
-const dbUrl = "mongodb://localhost:27017/assets-list";
+const dbUrl = "mongodb+srv://testadmin:6xykHTahsjE7wm7V@webapp-cluster.ddu9ifj.mongodb.net/";
 const client = new MongoClient(dbUrl);
 
 const app = express();
@@ -38,6 +37,7 @@ app.get("/studio", (request, response) => {
 //assets
 app.get("/assets", async (request, response) => {
     let asset = await getAssets();
+    // console.log(assets);
     response.render("assets", { title: "Assets", list: asset });
 });
 app.get("/assets/admin", async (request, response) => {
@@ -46,6 +46,7 @@ app.get("/assets/admin", async (request, response) => {
 });
 app.get("/assets/admin/add", async (request, response) => {
     let asset = await getAssets();
+    
     response.render("assets-add", { title: "Add assets", list: asset })
 });
 app.post("/assets/admin/add/submit", async (request, response) => {
@@ -55,10 +56,9 @@ app.post("/assets/admin/add/submit", async (request, response) => {
     let name = request.body.name;
 
     var newAssets = { "weight": weight, "price": price, "imgsrc": imgsrc, "name": name };
-
+    // console.log(newAssets); //working
     await addAssets(newAssets);
     response.redirect("/assets")
-
 });
 
 //to run the port IMP
@@ -70,16 +70,19 @@ app.listen(port, () => {
 async function connection() {
     db = client.db("assets-list");
     return db;
+    
 }
 
 async function getAssets() {
     db = await connection();
-    var results = db.collection("assets-list").find();
+    var results = db.collection("assets").find();
     res = await results.toArray();
     return res;
 }
-async function addAssets(ast) {
+async function addAssets(asset) {
     db = await connection();
-    var status = await db.collection("assets-list").insertOne(ast);
+    var status = await db.collection("assets").insertOne(asset);
+    // console.log(status);
     console.log("link added");
+    return status;
 }

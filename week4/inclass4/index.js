@@ -2,11 +2,11 @@ const express = require("express");
 const path = require("path"); //needed for functions having to do with file paths
 const { MongoClient, ObjectId } = require("mongodb"); //get the mongodb class of objects
 
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 //create a new MongoClient
-const dbURL = `mongodb://${process.env.DBUSER}:${process.env.DBPWD}@${process.env.DBHOST}/?authSource=newdb`;
+const dbURL = `mongodb://localhost:27017/`;
 const client = new MongoClient(dbURL); //creates MongoClient
 
 const app = express();

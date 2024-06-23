@@ -1,0 +1,15 @@
+doctype html 
+html 
+  head
+    meta(charset="utf-8") 
+    title #{title} | Random site
+    -//Static file folders are treated like a root folder
+    link(rel="stylesheet", href="/css/styles.css")
+    block scripts
+      script(src="/js/common.js")
+  body
+    include header.pug
+    main#main 
+      block layout-content
+    footer#footer 
+      div &copy; Copyright HTTP5222, 2024.
