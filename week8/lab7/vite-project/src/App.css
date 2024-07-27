@@ -1,0 +1,133 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font: 600 32px 'Montserrat';
+  text-transform: uppercase;
+  text-align: center;
+  color: #555;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: black;
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  color: #000;
+}
+
+.nav-links {
+  list-style-type: none;
+  margin: 0 20px;
+  cursor: pointer;
+  font: 600 20px 'Montserrat';
+  text-transform: uppercase;
+}
+
+.nav-links:hover {
+  color: tomato;
+}
+
+.hero {
+  position: relative;
+  top: 0;
+  height: 80vh;
+  background: url('./hero-img.png');
+  background-size: cover;
+  background-position: center;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-header {
+  font: 700 32px 'Oswald';
+  text-align: center;
+}
+
+.hero-header h1 {
+  margin: 0;
+  color: #fff;
+}
+
+.hero-header button {
+  font: 700 16px 'Montserrat';
+  border: none;
+  background: tomato;
+  padding: 15px 20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  grid-gap: 30px;
+  padding: 0 25px 50px 15px;
+  max-width: 950px;
+  margin: 0 auto; 
+}
+
+.gallery .gallery-item {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+.gallery-item img {
+  width: 90%;
+  height: 200px;
+}
+
+svg {
+  width: 130px;
+  margin-top: -5.5em;
+  margin-bottom: -5.6em;
+  margin-left: 0.5em;
+}
+
+.gallery-item-text {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+.gallery-item-text h1 {
+  font: 400 20px 'Oswald';
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255,255,255,.7);
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 5px 0;
+  
+  background: rgba(0, 0, 0, .15);
+  backdrop-filter: blur( 9px );
+}
