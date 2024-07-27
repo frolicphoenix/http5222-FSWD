@@ -1,15 +1,16 @@
 
 const API_URL = "https://www.googleapis.com/books/v1/volumes";
+const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+
 
 async function getBooksByQuery(query) {
-    const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+    
 
     // console.log(apiKey);
-
     const encodedQuery = encodeURIComponent(query);
     const reqURL = `${API_URL}?q=${encodedQuery}&key=${apiKey}`;
 
-    // console.log("Request URL:", reqURL); // Log the URL to ensure it's correct
+    console.log("Request URL:", reqURL); // Log the URL to ensure it's correct
 
     try {
         const response = await fetch(reqURL, {
@@ -32,6 +33,27 @@ async function getBooksByQuery(query) {
     }
 }
 
+async function getBooksByGenre(genre, maxResults = 10) {
+    
+    const encodedGenre = encodeURIComponent(`subject:${genre}`);
+    const reqURL = `${API_URL}?q=${encodedGenre}&maxResults=${maxResults}&key=${apiKey}`;
+
+    // console.log("Request URL:", reqURL); // Log the URL to ensure it's correct
+
+    try {
+        const response = await fetch(reqURL);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching books by genre:', error);
+        throw error;
+    }
+}
+
 module.exports = {
-    getBooksByQuery
+    getBooksByQuery,
+    getBooksByGenre
 };

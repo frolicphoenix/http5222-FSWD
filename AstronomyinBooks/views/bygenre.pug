@@ -2,15 +2,18 @@ extends layout
 
 block layout-content
     .content
-        if books.length > 0
-            h1 List of Harry Potter Books
+        h1 Sci-Fi Book Titles
+        if books && books.length > 0
             ul
                 each book in books
                     li
                         h2= book.volumeInfo.title
                         p Authors: 
-                            each author in book.volumeInfo.authors
-                                span= author + ' '
+                            if book.volumeInfo.authors
+                                each author in book.volumeInfo.authors
+                                    span= author + ' '
+                            else
+                                span Unknown Author
                         p= book.volumeInfo.publisher ? 'Published by: ' + book.volumeInfo.publisher : 'Publisher: N/A'
                         a(href=book.volumeInfo.infoLink) More Info
         else
