@@ -5,7 +5,6 @@ const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
 
 async function getBooksByQuery(query) {
     
-
     // console.log(apiKey);
     const encodedQuery = encodeURIComponent(query);
     const reqURL = `${API_URL}?q=${encodedQuery}&key=${apiKey}`;
@@ -134,10 +133,27 @@ async function searchBooks(query) {
     }
 }
 
+async function getBooksByKeyword(keyword) {
+    const encodedKeyword = encodeURIComponent(`"${keyword}"`);
+    const url = `${API_URL}?q=${encodedKeyword}&key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return data.items || [];
+    } catch (error) {
+        console.error('Error searching books by keyword:', error);
+        return [];
+    }
+}
+
 module.exports = {
     getBooksByQuery,
     getBooksByGenre,
     getBooksByFilters,
     searchBooksByText,
-    searchBooks
+    searchBooks,
+    getBooksByKeyword
 };

@@ -7,8 +7,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || "5000";
 
-const googlebooksAPI = require("./modules/googlebooks/api");
 const nasaApi = require("./modules/nasa/nasaapi");
+const googlebooksAPI = require("./modules/googlebooks/api"); // This should be declared globally if used in multiple routes
 
 // Setting up express object and port
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,13 +18,7 @@ app.set("view engine", "pug");
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-    try {
-        const books = await googlebooksAPI.getBooksByQuery("star wars");
-        const items = books.items || [];
-        res.render("index", { title: "Harry Potter Books", books: items });
-    } catch (error) {
-        res.status(500).send("Failed to fetch books: " + error.message);
-    }
+    res.render("index", { title: "HOME" });
 });
 
 app.get("/byfilter", async (req, res) => {
@@ -42,17 +36,40 @@ app.get("/byfilter", async (req, res) => {
 });
 
 app.get('/events-by-month', async (req, res) => {
-    console.log("Query Parameters:", req.query);  // This will log the month and year received
+    console.log("Query Parameters:", req.query);  // This logs the month and year received
     const { month, year } = req.query;
 
     if (!month || !year) {
-        return res.render('events-by-month', { events: [] });
+        // Ensure to pass an empty object if query parameters are missing
+        return res.render('events-by-month', {
+            events: [],
+            query: req.query || {}  // This ensures something is always passed to prevent undefined errors
+        });
     }
 
     const events = await nasaApi.fetchAllAstronomicalEvents(month, year);
-    res.render('events-by-month', { events });
+    res.render('events-by-month', {
+        title: 'Events by Month',
+        events: events,
+        query: req.query  // Ensuring query is always passed to the template
+    });
 });
 
+
+app.get('/event/:date', async (req, res) => {
+    const date = req.params.date;
+    try {
+        const event = await nasaApi.fetchAstronomicalEventDetail(date);
+        if (!event) {
+            res.status(404).send("Event not found");
+            return;
+        }
+        const books = await googlebooksAPI.getBooksByKeyword(event.title);
+        res.render('event-detail', { event, books });
+    } catch (error) {
+        res.status(500).send("Failed to fetch event details: " + error.message);
+    }
+});
 
 app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`);

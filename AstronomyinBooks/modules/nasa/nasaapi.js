@@ -12,7 +12,7 @@ async function fetchAstronomicalEvent(date) {
         return await response.json();
     } catch (error) {
         console.error("Error fetching data:", error);
-        return null;  // Return null or similar if an error occurs
+        return null;  // Returns null
     }
 }
 
@@ -37,33 +37,17 @@ async function fetchAllAstronomicalEvents(month, year) {
     return events;
 }
 
+async function fetchAstronomicalEventDetail(date) {
+    try {
+        const response = await fetch(`${API_URL}?date=${date}&api_key=${apiKey}`);
+        if (!response.ok) {
+            throw new Error(`HTTP status ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching event detail:", error);
+        return null;  // Returns null on error
+    }
+}
 
-module.exports = { fetchAllAstronomicalEvents };
-
-// async function fetchAstronomicalEvents(date) {
-//     const url = `${API_URL}?api_key=${apiKey}&date=${date}`;
-//     const response = await fetch(url);
-//     const data = await response.json();
-//     if (!response.ok) {
-//         throw new Error(`API call failed: ${data.error}`);
-//     }
-//     return data;
-// }
-
-// async function fetchAllAstronomicalEvents() {
-//     let events = [];
-//     let date = new Date();
-//     let month = date.getMonth() + 1;
-//     let year = date.getFullYear();
-//     // Simulate fetching data for each day of the month (simplified)
-//     for (let day = 1; day <= 30; day++) { // Assuming 30 days for simplicity
-//         try {
-//             const eventDate = `${year}-${month}-${day < 10 ? '0' + day : day}`;
-//             const event = await fetchAstronomicalEvent(eventDate);
-//             events.push(event);
-//         } catch (error) {
-//             console.log(`No data for ${day}`, error);
-//         }
-//     }
-//     return events;
-// }
+module.exports = { fetchAllAstronomicalEvents, fetchAstronomicalEventDetail };

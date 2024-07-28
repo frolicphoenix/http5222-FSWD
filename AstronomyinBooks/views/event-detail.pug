@@ -1,0 +1,14 @@
+extends layout
+
+block layout-content
+  h1= event.title
+  img(src=event.url, alt=event.title)
+  h2 Books related to this event
+  if books.length
+    ul
+      each book in books
+        li
+          h3= book.volumeInfo.title
+          p= book.volumeInfo.description
+  else
+    p No books found related to this event.

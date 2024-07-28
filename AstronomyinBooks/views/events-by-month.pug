@@ -3,39 +3,40 @@ extends layout
 block layout-content
     h1 Astronomical Events by Month
     p Add dates to get the results
-
     form(method="get", action="/events-by-month")
-      div    
+      div
         select(name="month")
-          option(value="1") January
-          option(value="2") February
-          option(value="3") March
-          option(value="4") April
-          option(value="5") May
-          option(value="6") June
-          option(value="7") July
-          option(value="8") August
-          option(value="9") September
-          option(value="10") October
-          option(value="11") November
-          option(value="12") December
+          - const selectedMonth = query && query.month ? query.month : '';
+          option(value="1", selected=selectedMonth === '1' ? true : false) January
+          option(value="2", selected=selectedMonth === '2' ? true : false) February
+          option(value="3", selected=selectedMonth === '3' ? true : false) March
+          option(value="4", selected=selectedMonth === '4' ? true : false) April
+          option(value="5", selected=selectedMonth === '5' ? true : false) May
+          option(value="6", selected=selectedMonth === '6' ? true : false) June
+          option(value="7", selected=selectedMonth === '7' ? true : false) July
+          option(value="8", selected=selectedMonth === '8' ? true : false) August
+          option(value="9", selected=selectedMonth === '9' ? true : false) September
+          option(value="10", selected=selectedMonth === '10' ? true : false) October
+          option(value="11", selected=selectedMonth === '11' ? true : false) November
+          option(value="12", selected=selectedMonth === '12' ? true : false) December          
       div
         select(name="year")
-          - const currentYear = new Date().getFullYear()
+          - const selectedYear = query.year ? query.year : '';
+          - const currentYear = new Date().getFullYear();
           - for (let year = currentYear - 10; year <= currentYear + 10; year++)
-            option(value=year)= year
+            option(value=year, selected=selectedYear == year ? true : false)= year
       div
         button(type="submit") Get Events
-
     if events && events.length
-      div.gallery
-        each event in events
-          if event && event.media_type == "image"
-            div.card
-              img.card-image(src=event.url, alt=event.title)
-              div.card-body
-                h4.card-title= event.title
-                p.card-date= event.date
-                p.card-explanation= event.explanation
+          div.gallery
+            each event in events
+              if event && event.media_type == "image"
+                div.card
+                  a
+                  img.card-image(src=event.url, alt=event.title)
+                  div.card-body
+                    h4.card-title= event.title
+                    p.card-date= event.date
+                    p.card-explanation= event.explanation
     else
-      p No events found or data is unavailable.
+          p No events found or data is unavailable.
