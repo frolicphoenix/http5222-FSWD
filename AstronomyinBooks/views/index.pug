@@ -1,17 +1,6 @@
 extends layout
 
 block layout-content
-    .content
-        if books.length > 0
-            h1 List of Harry Potter Books
-            ul
-                each book in books
-                    li
-                        h2= book.volumeInfo.title
-                        p Authors: 
-                            each author in book.volumeInfo.authors
-                                span= author + ' '
-                        p= book.volumeInfo.publisher ? 'Published by: ' + book.volumeInfo.publisher : 'Publisher: N/A'
-                        a(href=book.volumeInfo.infoLink) More Info
-        else
-            p No books found
+    .content 
+        p Click here to go to the astronomical events page to start your search 
+        a(href="/events-by-month") EVENTS BY MONTH

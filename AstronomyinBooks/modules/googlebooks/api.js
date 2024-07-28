@@ -119,9 +119,25 @@ async function searchBooksByText(query) {
     }
 }
 
+async function searchBooks(query) {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(`Google Books API call failed: ${data.error.message}`);
+        }
+        return data.items || [];
+    } catch (error) {
+        console.error('Failed to fetch books:', error);
+        throw error;
+    }
+}
+
 module.exports = {
     getBooksByQuery,
     getBooksByGenre,
     getBooksByFilters,
-    searchBooksByText
+    searchBooksByText,
+    searchBooks
 };
