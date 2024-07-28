@@ -1,4 +1,4 @@
-/* Basic Reset */
+
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +12,6 @@ body {
     color: #333;
 }
 
-/* Container for all content to add padding */
 .container {
     width: 95%;
     max-width: 1200px;
@@ -104,7 +103,7 @@ footer#footer {
     color: #fff;
     text-align: center;
     padding: 10px 20px;
-    position: relative; /* Changed from absolute to avoid layout issues */
+    position: relative; 
     bottom: 0;
     width: 100%;
 }
@@ -133,3 +132,48 @@ footer p {
         font-size: 14px;
     }
 }
+
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 8px; /* Space between items */
+    padding: 8px; 
+}
+
+/* Each item in the gallery */
+.event {
+    position: relative;
+    overflow: hidden;
+    background: #f3f3f3;
+}
+
+.event img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    transition: transform 0.3s ease-in-out;
+}
+
+.event:hover img {
+    transform: scale(1.1); 
+}
+
+
+.event-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.event:hover .event-info {
+    opacity: 1; 
+}
+

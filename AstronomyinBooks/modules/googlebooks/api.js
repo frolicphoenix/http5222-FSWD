@@ -85,10 +85,43 @@ async function getBooksByFilters({ title, author, year, genre }) {
     }
 }
 
+async function searchBooksByText(query) {
+    const encodedQuery = encodeURIComponent(`"${query}"`); // Ensures the query is treated as a phrase
+    const url = `${API_URL}?q=${encodedQuery}&key=${apiKey}`;
 
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return data; // Returns the full response
+    } catch (error) {
+        console.error('Error searching books by text:', error);
+        return { items: [] }; // Return empty items array on error
+    }
+}
+
+async function searchBooksByText(query) {
+    const encodedQuery = encodeURIComponent(`intext:"${query}"`);
+    const url = `${API_URL}?q=${encodedQuery}&key=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status} - ${data.error.message}`);
+        }
+        return data;
+    } catch (error) {
+        console.error('Error fetching books:', error);
+        return { items: [] }; // Safe fallback
+    }
+}
 
 module.exports = {
     getBooksByQuery,
     getBooksByGenre,
-    getBooksByFilters
+    getBooksByFilters,
+    searchBooksByText
 };

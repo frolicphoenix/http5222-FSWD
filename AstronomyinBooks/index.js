@@ -2,16 +2,19 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
+
 const dotenv = require("dotenv");
 dotenv.config();
 
-// const trakt = require("./modules/trakt/api");
+console.log(process.env.NASA_API_KEY); 
+const apiKey = process.env.NASA_API_KEY;
+
 const googlebooksAPI = require("./modules/googlebooks/api");
+const fetchAstronomicalEvents = require('./modules/nasa/nasaapi');
 
 //setting up express object and port
-
 const port = process.env.PORT || "8888";
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set("views", path.join(__dirname, "views"));
@@ -65,7 +68,25 @@ app.get("/byfilter", async (req, res) => {
     }
 });
 
+app.get('/byText', async (req, res) => {
+    const { textSearch } = req.query;
+    if (!textSearch) {
+        return res.render('byText', { books: [], message: 'Please provide text to search within books.' });
+    }
 
+    try {
+        const result = await googlebooksAPI.searchBooksByText(textSearch);
+        res.render('byText', { books: result.items || [], message: result.items.length ? '' : 'No books found.' });
+    } catch (error) {
+        console.error('Error searching books:', error);
+        res.status(500).render('byText', { books: [], message: 'Failed to search books due to server error.' });
+    }
+});
+
+app.get('/astronomy-gallery', async (req, res) => {
+    const events = await fetchAstronomicalEvents(apiKey);
+    res.render('astronomy-gallery', { events: events });
+});
 
 //setting up server listening
 app.listen(port, () => {

@@ -1,0 +1,13 @@
+extends layout
+
+block layout-content
+    h1 Astronomical Events Gallery
+    if events.length > 0
+        .gallery
+            each event in events
+                .event
+                    img(src=event.url alt=event.title)
+                    h2= event.title
+                    p= event.explanation
+    else
+        p No events found.
