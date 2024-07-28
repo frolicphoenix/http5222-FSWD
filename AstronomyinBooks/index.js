@@ -32,7 +32,8 @@ app.get("/", async (req, res) => {
 
 app.get("/scifi", async (req, res) => {
     try {
-        const response = await googlebooksAPI.getBooksByGenre("romance", 40); // Adjust the genre as necessary
+        // Adjust the genre as necessary
+        const response = await googlebooksAPI.getBooksByGenre("Anime", 40); 
         const books = response.items || []; // Ensuring 'books' is an array even if 'items' is undefined
 
         // console.log(books);
@@ -47,6 +48,23 @@ app.get("/scifi", async (req, res) => {
         res.status(500).send("Server error when fetching books");
     }
 });
+
+app.get("/byfilter", async (req, res) => {
+    try {
+        const { title, author, year, genre } = req.query;
+        if (!title && !author && !year && !genre) {
+            res.render("byfilter", { title: "Search Results", books: [], error: "No search parameters provided." });
+            return;
+        }
+
+        const result = await googlebooksAPI.getBooksByFilters({ title, author, year, genre });
+        res.render("byfilter", { title: "Search Results", books: result.items || [] });
+    } catch (error) {
+        console.error('Failed to fetch books:', error);
+        res.status(500).send("Server error when fetching books");
+    }
+});
+
 
 
 //setting up server listening

@@ -1,0 +1,33 @@
+extends layout
+
+block layout-content
+    .content
+        form(action="/byfilter", method="get")
+            label(for="title") Title:
+            input(type="text", name="title", id="title")
+
+            label(for="author") Author:
+            input(type="text", name="author", id="author")
+
+            label(for="year") Year:
+            input(type="text", name="year", id="year")
+
+            label(for="genre") Genre:
+            input(type="text", name="genre", id="genre")
+
+            button(type="submit") Search
+
+        if books
+            if books.length > 0
+                h1 Search Results
+                ul
+                    each book in books
+                        li
+                            h2= book.volumeInfo.title
+                            p Authors: 
+                                each author in book.volumeInfo.authors
+                                    span= author + ' '
+                            p= book.volumeInfo.publishedDate
+                            a(href=book.volumeInfo.infoLink) More Info
+            else
+                p No books found

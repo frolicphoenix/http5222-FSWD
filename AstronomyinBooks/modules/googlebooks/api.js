@@ -53,7 +53,42 @@ async function getBooksByGenre(genre, maxResults = 10) {
     }
 }
 
+async function getBooksByFilters({ title, author, year, genre }) {
+    const queries = [];
+    if (title) queries.push(`intitle:"${title}"`);
+    if (author) queries.push(`inauthor:"${author}"`);
+    if (year) queries.push(`inpudate:"${year}"`);
+    if (genre) queries.push(`subject:"${genre}"`);
+    
+    if (queries.length === 0) {
+        console.error('No search parameters provided.');
+        return { items: [] }; // Return empty result to avoid hitting API unnecessarily
+    }
+
+    const query = queries.join('+');
+    const encodedQuery = encodeURIComponent(query);
+    const url = `${API_URL}?q=${encodedQuery}&key=${apiKey}`;
+
+    console.log("Constructed URL:", url); // This will show the full URL
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (!response.ok) {
+            console.error('API Error Response:', data);
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return data;
+    } catch (error) {
+        console.error('Error fetching books:', error);
+        return { items: [] }; // Return empty items array on error
+    }
+}
+
+
+
 module.exports = {
     getBooksByQuery,
-    getBooksByGenre
+    getBooksByGenre,
+    getBooksByFilters
 };
