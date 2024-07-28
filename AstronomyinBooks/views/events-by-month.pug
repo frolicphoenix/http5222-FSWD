@@ -32,8 +32,8 @@ block layout-content
             each event in events
               if event && event.media_type == "image"
                 div.card
-                  a
-                  img.card-image(src=event.url, alt=event.title)
+                  a(href=`/event/${event.date}`)
+                    img.card-image(src=event.url, alt=event.title, style='cursor:pointer;')
                   div.card-body
                     h4.card-title= event.title
                     p.card-date= event.date
