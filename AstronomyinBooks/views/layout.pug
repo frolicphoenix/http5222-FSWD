@@ -2,17 +2,28 @@ doctype html
 html
     head
         meta(charset="utf-8")
-        link(rel="stylesheet", href="/styles.css")
+        link(rel="stylesheet", href="/style.css")
+        script(src="https://kit.fontawesome.com/f7ad06f6cc.js", crossorigin="anonymous")
         title #{title} | Astronomy in Books
     body
         header#header
             .headercontent
-                h1#site-name
-                    a(href="/") Astronomy in Books
-                nav
-                    a(href="/events-by-month") Astronomical events
-                    a(href="/byfilter") Books List
+                h1.site-name 
+                    span 
+                        ul 
+                            li 
+                                a(href="/") ASTRONOMY IN BOOKS 
+                    nav
+                        ul 
+                            li 
+                                a(href='/', onclick="alertBox()")
+                                    i.fa-solid.fa-envelope 
+                            li 
+                                a(href="/events-by-month") | Astronomical events |
+                            li 
+                                a(href="/") | Books List |
         main#main
             block layout-content
         footer#footer
-            p &copy; Copyright Astronomy in Books by pranjall, 2024.
+            p &copy; Copyright <b>Astronomy in Books</b> by pranjall, 2024.
+    

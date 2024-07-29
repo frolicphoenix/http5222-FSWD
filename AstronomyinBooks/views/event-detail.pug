@@ -1,14 +1,23 @@
 extends layout
 
 block layout-content
-  h1= event.title
-  img(src=event.url, alt=event.title)
-  h2 Books related to this event
-  if books.length
-    ul
-      each book in books
-        li
-          h3= book.volumeInfo.title
-          p= book.volumeInfo.description
-  else
-    p No books found related to this event.
+  .detail-page
+    .event-info
+      h1= event.title
+      img(src=event.url, alt=event.title)
+      p= event.explanation
+    h2 Books inspired by this event
+    if books && books.length
+      .gallery
+        each book in books
+          if book && book.volumeInfo && book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
+            div.card
+              a(href=`#`)
+                img.card-image(src=book.volumeInfo.imageLinks.thumbnail, alt=book.volumeInfo.title, style='cursor:pointer;')
+              div.card-body
+                h4.card-title= book.volumeInfo.title
+                  if book.volumeInfo.publishedDate
+                    p.card-date= book.volumeInfo.publishedDate
+                p.card-description= book.volumeInfo.description
+    else
+      p No books found related to this event.
